@@ -91,7 +91,7 @@ jobs:
           else
               python -m pip install -i ${{ env.WHEELS_INDEX_URL }} llvmlite
           fi
-          python -m pip install build numpy==${{ matrix.numpy_build }} setuptools wheel tbb==2021.6 tbb-devel==2021.6
+          python -m pip install build numpy==${{ matrix.numpy_build }} setuptools wheel
 
       - name: Build wheel
         run: python -m build --wheel --no-isolation
@@ -160,4 +160,5 @@ jobs:
 
           # run tests
           python -m numba.runtests -m 4 -v
+
 
