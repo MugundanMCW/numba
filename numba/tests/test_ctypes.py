@@ -3,7 +3,7 @@ import sys
 import threading
 
 import numpy as np
-
+import platform
 
 from numba import jit, njit
 from numba.core import types, errors
@@ -76,7 +76,8 @@ class TestCTypesUseCases(MemoryLeakMixin, TestCase):
         x = 3.14
         self.assertEqual(pyfunc(x), cfunc(x))
 
-    @unittest.skipUnless(is_windows, "Windows-specific test")
+    @unittest.skipIf(sys.platform == "win32" and platform.machine().lower() == "arm64",
+                  "stdcall unsupported on Windows ARM64")
     def test_stdcall(self):
         # Just check that it doesn't crash
         cfunc = njit((types.uintc,))(use_c_sleep)
