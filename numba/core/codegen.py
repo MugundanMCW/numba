@@ -1393,7 +1393,7 @@ class JITCPUCodegen(CPUCodegen):
         else:
             reloc_model = 'default'
         options['reloc'] = 'static'
-        options['codemodel'] = 'small'  # ← Force small code model
+        options['codemodel'] = 'tiny'  # ← Force small code model
         print("[INFO] Applied Windows ARM64 fix: static + small code model")
 
         # Set feature attributes (such as ISA extensions)
