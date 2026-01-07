@@ -3,7 +3,6 @@ import functools
 import locale
 import weakref
 import ctypes
-import sys
 import html
 import textwrap
 
@@ -1381,20 +1380,10 @@ class JITCPUCodegen(CPUCodegen):
             reloc_model = 'static'
         elif arch.startswith('ppc'):
             reloc_model = 'pic'
-        elif arch.startswith('aarch64') or arch.startswith('arm64'):
-            # Windows ARM64 JIT needs static relocation for the same reason as x86:
-            # LLVM's Reloc::Default emits PE relocations that require the Windows
-            # loader to apply base relocations. Numba's in-process JIT memory
-            # manager does not apply these, causing :lo12: relocation overflow.
-            if sys.platform == 'win32':
-                reloc_model = 'pic'
-            else:
-                reloc_model = 'pic'  # Linux/macOS ARM64 can use PIC
         else:
             reloc_model = 'default'
-        options['reloc'] = 'static'
-        options['codemodel'] = 'tiny'  # ← Force small code model
-        print("[INFO] Applied Windows ARM64 fix: static + small code model")
+        options['reloc'] = reloc_model
+        options['codemodel'] = 'jitdefault'
 
         # Set feature attributes (such as ISA extensions)
         # This overrides default feature selection by CPU model above
