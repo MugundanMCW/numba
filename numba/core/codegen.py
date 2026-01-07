@@ -1387,7 +1387,7 @@ class JITCPUCodegen(CPUCodegen):
             # loader to apply base relocations. Numba's in-process JIT memory
             # manager does not apply these, causing :lo12: relocation overflow.
             if sys.platform == 'win32':
-                reloc_model = 'static'
+                reloc_model = 'pic'
             else:
                 reloc_model = 'pic'  # Linux/macOS ARM64 can use PIC
         else:
