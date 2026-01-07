@@ -1392,8 +1392,9 @@ class JITCPUCodegen(CPUCodegen):
                 reloc_model = 'pic'  # Linux/macOS ARM64 can use PIC
         else:
             reloc_model = 'default'
-        options['reloc'] = reloc_model
-        options['codemodel'] = 'jitdefault'
+        options['reloc'] = 'static'
+        options['codemodel'] = 'small'  # ← Force small code model
+        print("[INFO] Applied Windows ARM64 fix: static + small code model")
 
         # Set feature attributes (such as ISA extensions)
         # This overrides default feature selection by CPU model above
