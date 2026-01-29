@@ -73,11 +73,16 @@ jobs:
       
       - name: Download llvmlite wheel from release
         run: |
-          PYTHON_TAG="cp${{ matrix.python_canonical | replace('.', '') }}"
+          # Determine the wheel filename based on Python version
+          PYTHON_VERSION="${{ matrix.python_canonical }}"
+          PYTHON_TAG="cp${PYTHON_VERSION//.}"
           WHEEL_NAME="llvmlite-0.47.0.dev0+39.gbf28f754.dirty-${PYTHON_TAG}-${PYTHON_TAG}-win_arm64.whl"
+          
+          # Download the wheel from GitHub release
           mkdir -p llvmlite_wheels
           curl -L -o "llvmlite_wheels/${WHEEL_NAME}" \
             "https://github.com/${{ env.LLVMLITE_REPO }}/releases/download/${{ env.LLVMLITE_RELEASE_TAG }}/${WHEEL_NAME}"
+          
           echo "Downloaded wheel: ${WHEEL_NAME}"
           ls -lh llvmlite_wheels/
       
@@ -124,11 +129,16 @@ jobs:
       
       - name: Download llvmlite wheel from release
         run: |
-          PYTHON_TAG="cp${{ matrix.python_canonical | replace('.', '') }}"
+          # Determine the wheel filename based on Python version
+          PYTHON_VERSION="${{ matrix.python_canonical }}"
+          PYTHON_TAG="cp${PYTHON_VERSION//.}"
           WHEEL_NAME="llvmlite-0.47.0.dev0+39.gbf28f754.dirty-${PYTHON_TAG}-${PYTHON_TAG}-win_arm64.whl"
+          
+          # Download the wheel from GitHub release
           mkdir -p llvmlite_wheels
           curl -L -o "llvmlite_wheels/${WHEEL_NAME}" \
             "https://github.com/${{ env.LLVMLITE_REPO }}/releases/download/${{ env.LLVMLITE_RELEASE_TAG }}/${WHEEL_NAME}"
+          
           echo "Downloaded wheel: ${WHEEL_NAME}"
           ls -lh llvmlite_wheels/
       
