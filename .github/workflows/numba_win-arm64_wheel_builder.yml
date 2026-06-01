@@ -80,8 +80,8 @@ jobs:
       
           echo "Downloading artifact: ${ARTIFACT_NAME}"
       
-          gh run download 26733780068 \
-            --repo MugundanMCW/llvmlite \
+          gh run download 26743544766 \
+            --repo khmyznikov/PyEnv-WoA-State \
             --name "${ARTIFACT_NAME}" \
             --dir llvmlite_wheels
       
@@ -144,8 +144,8 @@ jobs:
       
           echo "Downloading artifact: ${ARTIFACT_NAME}"
       
-          gh run download 26733780068 \
-            --repo MugundanMCW/llvmlite \
+          gh run download 26743544766 \
+            --repo khmyznikov/PyEnv-WoA-State \
             --name "${ARTIFACT_NAME}" \
             --dir llvmlite_wheels
       
