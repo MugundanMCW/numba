@@ -229,6 +229,12 @@ skip_macos_fenv_errors = unittest.skipIf(IS_MACOS,
     "fenv.h-like functionality unreliable on macOS")
 IS_MACOS_ARM64 = IS_MACOS and _uname.machine == 'arm64'
 
+# Reports an inf values mismatch between NumPy and Numba results.
+_uname = platform.uname()
+IS_WIN_ARM64 = _uname.system == 'Windows' and _uname.machine == 'ARM64'
+skip_win_arm64 = unittest.skipIf(IS_WIN_ARM64,
+    "Known issues on Windows ARM64")
+
 try:
     import scipy.linalg.cython_lapack
     has_lapack = True
