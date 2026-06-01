@@ -24,7 +24,7 @@ max_python_version = "3.15"  # exclusive
 min_numpy_build_version = "1.11"
 min_numpy_run_version = "1.22"
 min_llvmlite_version = "0"
-max_llvmlite_version = "0.49"
+max_llvmlite_version = "0.50"
 
 if sys.platform.startswith('linux'):
     # Patch for #2555 to make wheels without libpython
