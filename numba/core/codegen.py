@@ -5,6 +5,7 @@ import weakref
 import ctypes
 import html
 import textwrap
+import sys
 
 import llvmlite.binding as ll
 import llvmlite.ir as llvmir
