@@ -1384,7 +1384,10 @@ class JITCPUCodegen(CPUCodegen):
             reloc_model = 'default'
         options['reloc'] = reloc_model
         options['codemodel'] = 'jitdefault'
-
+        # Windows ARM64: jitdefault maps to large code model which is
+        # incompatible with the Windows AArch64 assembler, use small instead
+        if arch.startswith('aarch64') and sys.platform == 'win32':
+            options['codemodel'] = 'small'
         # Set feature attributes (such as ISA extensions)
         # This overrides default feature selection by CPU model above
         options['features'] = self._tm_features
